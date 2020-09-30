@@ -30,7 +30,7 @@ public class PlaylistsCmd extends MusicCommand
     {
         super(bot);
         this.name = "playlists";
-        this.help = "shows the available playlists";
+        this.help = "muestra las playlist disponibles";
         this.aliases = bot.getConfig().getAliases(this.name);
         this.guildOnly = true;
         this.beListening = false;
@@ -44,19 +44,19 @@ public class PlaylistsCmd extends MusicCommand
             bot.getPlaylistLoader().createFolder();
         if(!bot.getPlaylistLoader().folderExists())
         {
-            event.reply(event.getClient().getWarning()+" Playlists folder does not exist and could not be created!");
+            event.reply(event.getClient().getWarning()+" el directorio Playlist no existe y no ha podido ser creado!");
             return;
         }
         List<String> list = bot.getPlaylistLoader().getPlaylistNames();
         if(list==null)
-            event.reply(event.getClient().getError()+" Failed to load available playlists!");
+            event.reply(event.getClient().getError()+" No se pudieron cargar las listas de reproducción disponibles.!");
         else if(list.isEmpty())
-            event.reply(event.getClient().getWarning()+" There are no playlists in the Playlists folder!");
+            event.reply(event.getClient().getWarning()+" No hay listas de reproducción en la carpeta Listas de reproducción!");
         else
         {
-            StringBuilder builder = new StringBuilder(event.getClient().getSuccess()+" Available playlists:\n");
+            StringBuilder builder = new StringBuilder(event.getClient().getSuccess()+" Playlist disponibles:\n");
             list.forEach(str -> builder.append("`").append(str).append("` "));
-            builder.append("\nType `").append(event.getClient().getTextualPrefix()).append("play playlist <name>` to play a playlist");
+            builder.append("\nType `").append(event.getClient().getTextualPrefix()).append("play playlist <name>` para reproducir una playlist (obvio no? XD)");
             event.reply(builder.toString());
         }
     }

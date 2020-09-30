@@ -30,7 +30,7 @@ public class ShuffleCmd extends MusicCommand
     {
         super(bot);
         this.name = "shuffle";
-        this.help = "shuffles songs you have added";
+        this.help = "baraja las canciones que has añadido";
         this.aliases = bot.getConfig().getAliases(this.name);
         this.beListening = true;
         this.bePlaying = true;
@@ -44,13 +44,13 @@ public class ShuffleCmd extends MusicCommand
         switch (s) 
         {
             case 0:
-                event.replyError("You don't have any music in the queue to shuffle!");
+                event.replyError("No tienes música en la cola para mezclar!");
                 break;
             case 1:
-                event.replyWarning("You only have one song in the queue!");
+                event.replyWarning("Solo tienes una canción en la cola!");
                 break;
             default:
-                event.replySuccess("You successfully shuffled your "+s+" entries.");
+                event.replySuccess("Has barajado "+s+" entradas.");
                 break;
         }
     }

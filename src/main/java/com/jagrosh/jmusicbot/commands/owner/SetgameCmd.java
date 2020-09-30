@@ -29,7 +29,7 @@ public class SetgameCmd extends OwnerCommand
     public SetgameCmd(Bot bot)
     {
         this.name = "setgame";
-        this.help = "sets the game the bot is playing";
+        this.help = "establece a qué esta jugando el bot";
         this.arguments = "[action] [game]";
         this.aliases = bot.getConfig().getAliases(this.name);
         this.guildOnly = false;
@@ -48,11 +48,11 @@ public class SetgameCmd extends OwnerCommand
         {
             event.getJDA().getPresence().setGame(title.isEmpty() ? null : Game.playing(title));
             event.reply(event.getClient().getSuccess()+" **"+event.getSelfUser().getName()
-                    +"** is "+(title.isEmpty() ? "no longer playing anything." : "now playing `"+title+"`"));
+                    +"** ya no está "+(title.isEmpty() ? "reproduciendo nada." : "ahora reproduciendo `"+title+"`"));
         }
         catch(Exception e)
         {
-            event.reply(event.getClient().getError()+" The game could not be set!");
+            event.reply(event.getClient().getError()+" No se ha podido establecer el mierdijuego!");
         }
     }
     
@@ -62,7 +62,7 @@ public class SetgameCmd extends OwnerCommand
         {
             this.name = "stream";
             this.aliases = new String[]{"twitch","streaming"};
-            this.help = "sets the game the bot is playing to a stream";
+            this.help = "establece el juego al que está jugando como stream";
             this.arguments = "<username> <game>";
             this.guildOnly = false;
         }
@@ -73,18 +73,18 @@ public class SetgameCmd extends OwnerCommand
             String[] parts = event.getArgs().split("\\s+", 2);
             if(parts.length<2)
             {
-                event.replyError("Please include a twitch username and the name of the game to 'stream'");
+                event.replyError("Incluye un nombre de usuario de Twitch y el nombre del juego para 'transmitir'");
                 return;
             }
             try
             {
                 event.getJDA().getPresence().setGame(Game.streaming(parts[1], "https://twitch.tv/"+parts[0]));
                 event.replySuccess("**"+event.getSelfUser().getName()
-                        +"** is now streaming `"+parts[1]+"`");
+                        +"** está ahora emitiendo `"+parts[1]+"`");
             }
             catch(Exception e)
             {
-                event.reply(event.getClient().getError()+" The game could not be set!");
+                event.reply(event.getClient().getError()+" no se ha podido establecer!");
             }
         }
     }
@@ -95,7 +95,7 @@ public class SetgameCmd extends OwnerCommand
         {
             this.name = "listen";
             this.aliases = new String[]{"listening"};
-            this.help = "sets the game the bot is listening to";
+            this.help = "establece el juego que el bot está escuchando";
             this.arguments = "<title>";
             this.guildOnly = false;
         }
@@ -105,16 +105,16 @@ public class SetgameCmd extends OwnerCommand
         {
             if(event.getArgs().isEmpty())
             {
-                event.replyError("Please include a title to listen to!");
+                event.replyError("Por favor pon un titulo para escucharlo!");
                 return;
             }
             String title = event.getArgs().toLowerCase().startsWith("to") ? event.getArgs().substring(2).trim() : event.getArgs();
             try
             {
                 event.getJDA().getPresence().setGame(Game.listening(title));
-                event.replySuccess("**"+event.getSelfUser().getName()+"** is now listening to `"+title+"`");
+                event.replySuccess("**"+event.getSelfUser().getName()+"** está ahora escuchando `"+title+"`");
             } catch(Exception e) {
-                event.reply(event.getClient().getError()+" The game could not be set!");
+                event.reply(event.getClient().getError()+" No se ha podido establecer el juego!");
             }
         }
     }
@@ -125,7 +125,7 @@ public class SetgameCmd extends OwnerCommand
         {
             this.name = "watch";
             this.aliases = new String[]{"watching"};
-            this.help = "sets the game the bot is watching";
+            this.help = "establece qué juego está viendo";
             this.arguments = "<title>";
             this.guildOnly = false;
         }
@@ -135,16 +135,16 @@ public class SetgameCmd extends OwnerCommand
         {
             if(event.getArgs().isEmpty())
             {
-                event.replyError("Please include a title to watch!");
+                event.replyError("¡Pero pon un juego!");
                 return;
             }
             String title = event.getArgs();
             try
             {
                 event.getJDA().getPresence().setGame(Game.watching(title));
-                event.replySuccess("**"+event.getSelfUser().getName()+"** is now watching `"+title+"`");
+                event.replySuccess("**"+event.getSelfUser().getName()+"** está ahora viendo `"+title+"`");
             } catch(Exception e) {
-                event.reply(event.getClient().getError()+" The game could not be set!");
+                event.reply(event.getClient().getError()+" No se ha podido establecer!");
             }
         }
     }
